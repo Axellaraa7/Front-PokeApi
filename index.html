@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PokeApi</title>
+
+  <link rel="stylesheet" href="CSS/index.css">
+  <script src="JS/index.js" defer></script>
+
+</head>
+<body>
+  <header id="header">
+    <figure>
+      <img src="ASSETS/pokemon_logo.png" alt="" id="imgLogo" class="img">
+    </figure>
+    <nav>
+      <ul>
+        <li>Elemento 1</li>
+        <li>Elemento 1</li>
+        <li>Elemento 1</li>
+        <li>Elemento 1</li>
+      </ul>
+    </nav>
+  </header>
+  <main id="main">
+    <h1 class="mainTitle">BIENVENIDO A LA POKEAPI</h1>
+
+    <section class="pokedex">
+      <section class="screen">
+        <div class="screenPart sectionFlex">
+          <div class="card cardInfo">
+          </div>
+          <div class="card cardStats">
+          </div>
+          <div class="card cardHabilities">
+          </div>
+        </div>
+
+        <div class="screenPart">
+          <div id="selectPokemon">
+            <label for="pokemonesType">Escoja un pokemon:</label>
+            <select name="pokemonesType" id="pokemonesType"></select>
+          </div>   
+          
+        </div>
+
+        <div class="screenPart">
+          <figure class="figureImg">
+            <img src="ASSETS/imgInicial.jpg" id="frontImg" alt="">
+            <figcaption>Imagen Frontal</figcaption>
+          </figure>
+          <figure class="figureImg">
+            <img src="ASSETS/imgInicial.jpg" id="backImg" alt="">
+            <figcaption>Imagen Trasera</figcaption>
+          </figure>
+        </div>
+      </section>
+    
+      <section class="controls">
+        <div class="inputSearch">
+          <label for="types">Buscar pokemon por: </label>
+          <select list="types" name="types" id="selectApi">
+            <option value="name" selected>Nombre de pokemon</option>
+            <option value="number">Numero de pokemon</option>
+            <option value="type">Tipo de pokemon</option>
+            <option value="range">Rango de pokemon</option>
+          </select>
+        </div>
+        <div class="inputSearch">
+          <label for="busqueda">Ingresa tu busqueda: </label>
+          <input type="text" value="" name="busqueda" id="busqueda" placeholder="Escribe el nombre de un pokemon">
+        </div>
+        <div class="inputSearch">
+          <button class="btnSearch" id="buscar">BUSCAR</button>
+        </div>
+      </section>
+    </section>
+  </main>
+  <footer>
+  </footer>
+</body>
+</html>
