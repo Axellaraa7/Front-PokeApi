@@ -47,9 +47,6 @@ body{
 
 #header nav{
   width:30%;
-  color:white;
-  text-align: right;
-  border:2px solid red;
 }
 
 nav ul{
@@ -58,7 +55,20 @@ nav ul{
 }
 
 nav ul li{
-  flex:1 1 auto;
+  flex:0 1 auto;
+}
+
+nav ul li a{
+  display:block;
+  padding:1rem;
+  color:white;
+  font-size: 1.4rem;
+  font-weight:700;
+}
+
+nav ul li a:hover{
+  text-decoration: underline;
+  box-shadow:1px 1px 2px white , -1px -1px 2px white inset;
 }
 
 .img{
@@ -111,7 +121,7 @@ nav ul li{
   align-content: center;
   flex-wrap: wrap;
 
-  border:2px solid black;
+  /* border:2px solid black; */
 }
 
 .screen{
@@ -122,7 +132,7 @@ nav ul li{
 
   padding:1rem;
 
-  background-color: hsla(0,0%,80%,.2);
+  background-color: hsla(0,0%,80%,.55);
   border:15px solid hsla(var(--main),var(--lightMain),1);
   border-bottom:none;
   border-radius: 15px 15px 0 0; 
@@ -154,15 +164,16 @@ nav ul li{
   
 }
 
-.cardName{
+.cardSmall{
   flex:1 3 auto;
 }
 
-.cardStats{
+.cardMedium{
   flex:2 2 auto;
 }
 
-.cardHabilities{
+.cardLarge{
+  align-self: flex-end;
   flex:3 1 auto;
 }
 
@@ -178,7 +189,6 @@ nav ul li{
 
 #selectPokemon>select{
   width:85%;
-  
 }
 
 /*IMAGENES*/
@@ -186,7 +196,7 @@ nav ul li{
 .figureImg{
   flex:1 0 60%;
   margin:1rem 0;
-  border:2px solid black;
+  /* border:2px solid black; */
 }
 
 .figureImg img{
@@ -200,7 +210,13 @@ nav ul li{
   background-color:hsla(187,100%,74%,.7);
 }
 
+.figureImg img:hover{
+  transform: scale(1.1);
+  transition: transform .2s ease-in 0s;
+}
+
 figcaption{
+  margin-top:1rem;
   font-size: 1.4rem;
   font-weight: bold;
   text-align: center;

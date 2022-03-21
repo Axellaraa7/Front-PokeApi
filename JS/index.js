@@ -8,7 +8,28 @@ window.addEventListener("load",inicio,false);
 
 function inicio(){
   const button = document.getElementById("buscar");
-  button.addEventListener("click",makeFetch,false);
+  button.addEventListener("click",()=>{
+    let valueInput = busqueda.value.toLowerCase();
+    switch(select.value){
+      case "name":
+      case "number":
+        urlApi = "pokemon/"+valueInput;
+        searchByNameNumber();
+      break;
+      case "type":
+        urlApi = "type/"+valueInput;
+        searchBy(0);
+      break;
+      case "range":
+        //SE PUEDE GENERAR UN RANGO DIVIENDO EL STRING CON SPLIT
+        urlApi = "pokemon?limit="+valueInput+"&offset=0";
+        searchBy(1);
+      break;
+      default:
+        console.log("ERROR");
+      break;
+    }
+  },false);
   
   select.addEventListener("change",()=>{
     switch(select.value){
@@ -35,35 +56,13 @@ function inicio(){
   
 }
 
-function makeFetch(){
-  let valueInput = busqueda.value.toLowerCase();
-  switch(select.value){
-    case "name":
-    case "number":
-      urlApi = "pokemon/"+valueInput;
-      searchByNameNumber();
-    break;
-    case "type":
-      urlApi = "type/"+valueInput;
-      searchBy(0);
-    break;
-    case "range":
-      urlApi = "pokemon?limit="+valueInput+"&offset=0";
-      searchBy(1);
-    break;
-    default:
-      console.log("ERROR");
-    break;
-  }
-}
-
 function searchByNameNumber(){
   let url = `https://pokeapi.co/api/v2/${urlApi}`;
   
   fetch(url).then((response)=>{return response.json();})
   .then((data)=>{ 
     drawInfoPokemon(data);
-    console.log(data);
+    /* console.log(data); */
     
   })
   .catch((e)=>console.log("ERROR CATCH : "+e));
@@ -75,7 +74,7 @@ function searchBy(valueSelectSearch){
   .then((data)=>{ 
 
     const selectPokemon = document.getElementById("selectPokemon");
-    console.log(pokemonesType.options.length);
+/*     console.log(pokemonesType.options.length); */
     pokemonesType.options.length = 0;
     if(valueSelectSearch === 0){
       data.pokemon.forEach(pokemon =>{ 
@@ -92,7 +91,7 @@ function searchBy(valueSelectSearch){
         pokemonesType.appendChild(option); 
       });
     }
-    console.log(pokemonesType.options.length);
+    /* console.log(pokemonesType.options.length); */
     selectPokemon.style.display = "block";
     pokemonesType.addEventListener("change",()=>{
       let url = `https://pokeapi.co/api/v2/pokemon/${pokemonesType.value}`;
@@ -116,9 +115,12 @@ function drawInfoPokemon(data){
     data.stats.map((stat)=>{return stat.stat.name;}),
     data.stats.map((stat)=>{return stat.base_stat;})
   ];
-  let moves = data.abilities.map((moves) =>{
-    return moves.ability.name;
+  let abilities = data.abilities.map((abilities) =>{
+    return abilities.ability.name;
   });
+  let moves = data.moves.map((moves)=>{return moves.move.name});
+  moves.length = [12];
+  /* console.log(moves); */
   
   pokeFront.src = data.sprites.front_default;
   pokeBack.src = data.sprites.back_default;
@@ -126,11 +128,13 @@ function drawInfoPokemon(data){
   parrafos[0].textContent += "\nTYPES: \n";
   types.forEach(type=>{parrafos[0].textContent += "-> "+type+"\n";})
   parrafos[1].textContent = "ESTADISTICAS: \n";
-  parrafos[2].textContent = "HABILIDADES: \n";
-  moves.forEach((move)=>parrafos[2].textContent += "-> "+move+"\n");
   for(let i=0;i<stats[0].length;i++){
     parrafos[1].textContent += stats[0][i]+ " : " +stats[1][i]+"\n";
   }
+  parrafos[2].textContent = "HABILIDADES: \n";
+  abilities.forEach((ability)=>parrafos[2].textContent += "-> "+ability+"\n");
+  parrafos[3].textContent = "MOVIMIENTOS PRINCIPALES: \n";
+  moves.forEach((move)=>{ parrafos[3].textContent += "-> "+move+"\n"});
 }
 
 /*Para limpiar un select se hace un ciclo a la inversa del tamaño del select a 0 y usando la funcion remove, o se limpia también igualandolo a 0, las dos funcionan.*/
